@@ -710,6 +710,57 @@ EXISTING_VO_SCENE_GROUPS = [
 ]
 EXTENSION_SCENE_START = 21  # index premiere scene extension dans SCENES
 
+# Organisation Google Flow : max ~16 images par prompt (qualite optimale)
+FLOW_BATCHES = [
+    {"id": "Hook-A", "act": "HOOK", "start": "i1", "end": "i16", "count": 16, "rythme": "1-1,2 sec/image"},
+    {"id": "Hook-B", "act": "HOOK", "start": "i17", "end": "i28", "count": 12, "rythme": "1-1,2 sec/image"},
+    {"id": "Acte1-A", "act": "ACTE 1 - La soiree", "start": "i29", "end": "i44", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte1-B", "act": "ACTE 1 - La soiree", "start": "i45", "end": "i60", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte1-C", "act": "ACTE 1 - La soiree", "start": "i61", "end": "i68", "count": 8, "rythme": "3-4 sec/image"},
+    {"id": "Acte2-A", "act": "ACTE 2 - La decouverte", "start": "i69", "end": "i84", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte2-B", "act": "ACTE 2 - La decouverte", "start": "i85", "end": "i98", "count": 14, "rythme": "3-4 sec/image"},
+    {"id": "Acte3-A", "act": "ACTE 3 - Le leak iCloud", "start": "i99", "end": "i114", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte3-B", "act": "ACTE 3 - Le leak iCloud", "start": "i115", "end": "i118", "count": 4, "rythme": "3-4 sec/image"},
+    {"id": "Acte4-A", "act": "ACTE 4 - La chute", "start": "i119", "end": "i134", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte4-B", "act": "ACTE 4 - La chute", "start": "i135", "end": "i145", "count": 11, "rythme": "3-4 sec/image"},
+    {"id": "Acte5", "act": "ACTE 5 - Epilogue", "start": "i146", "end": "i160", "count": 15, "rythme": "3-4 sec/image"},
+    {"id": "Acte6-A", "act": "ACTE 6 - La semaine d'apres", "start": "i161", "end": "i176", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte6-B", "act": "ACTE 6 - La semaine d'apres", "start": "i177", "end": "i180", "count": 4, "rythme": "3-4 sec/image"},
+    {"id": "Acte7", "act": "ACTE 7 - La faveur", "start": "i181", "end": "i198", "count": 18, "rythme": "3-4 sec/image"},
+    {"id": "Acte8", "act": "ACTE 8 - Menaces", "start": "i199", "end": "i216", "count": 18, "rythme": "3-4 sec/image"},
+    {"id": "Acte9", "act": "ACTE 9 - Il demenage", "start": "i217", "end": "i231", "count": 15, "rythme": "3-4 sec/image"},
+    {"id": "Acte10", "act": "ACTE 10 - Nouvelle ecole", "start": "i232", "end": "i243", "count": 12, "rythme": "3-4 sec/image"},
+    {"id": "Acte11", "act": "ACTE 11 - Cloture finale", "start": "i244", "end": "i260", "count": 17, "rythme": "3-4 sec/image"},
+]
+
+
+def get_all_script_lines():
+    lines = list(HOOK)
+    for act in ACTS:
+        lines.extend(act["lines"])
+    return lines
+
+
+def lines_for_image_range(start_id: str, end_id: str):
+    si = int(start_id[1:])
+    ei = int(end_id[1:])
+    return [(img_id, text) for img_id, text in get_all_script_lines() if si <= int(img_id[1:]) <= ei]
+
+
+def vo_parts_for_range(start_id: str, end_id: str, vo_chunks: list) -> str:
+    si = int(start_id[1:])
+    ei = int(end_id[1:])
+    parts = []
+    for c in vo_chunks:
+        cs = int(c["start"][1:])
+        ce = int(c["end"][1:])
+        if cs <= ei and ce >= si:
+            label = f"VO {c['part']}"
+            if c.get("is_new"):
+                label += "*"
+            parts.append(label)
+    return ", ".join(parts) if parts else "-"
+
 
 def build_vo_chunks():
     """
@@ -941,6 +992,51 @@ def generate_pdf():
         pdf.body_text(
             f"Scene {i:02d} | {start_id}-{end_id} | ~{sec}s | {sw} mots | {scene['name']}"
         )
+
+    # --- PARTIE C (ajout en fin de PDF, contenu existant inchange) ---
+    pdf.add_page()
+    pdf.section_title("PARTIE C - ORGANISATION GOOGLE FLOW", 14)
+    pdf.meta_line(
+        "1 prompt Flow = 1 lot ci-dessous. Max ~16 images par prompt pour garder la qualite.\n"
+        "Generer les images du lot, envoyer la capture grille, puis passer au lot suivant.\n"
+        "* = VO nouveau a generer (VO 14+)."
+    )
+    pdf.ln(2)
+    pdf.body_text(f"Nombre total de prompts Flow : {len(FLOW_BATCHES)}")
+    pdf.ln(2)
+
+    for batch in FLOW_BATCHES:
+        vo_ref = vo_parts_for_range(batch["start"], batch["end"], vo_chunks)
+        pdf.sub_title(
+            f"FLOW {batch['id']} | {batch['act']} | {batch['start']} a {batch['end']} "
+            f"| {batch['count']} images | {batch['rythme']}"
+        )
+        pdf.meta_line(f"Voice-Over correspondant : {vo_ref}")
+        pdf.meta_line(f"Prompt Flow : Generate {batch['count']} separate images (16:9, stick figure)")
+        for img_id, line in lines_for_image_range(batch["start"], batch["end"]):
+            pdf.scene_line(img_id, line)
+        pdf.ln(3)
+        if pdf.get_y() > 240:
+            pdf.add_page()
+
+    pdf.add_page()
+    pdf.section_title("INDEX FLOW - VUE RAPIDE", 13)
+    pdf.set_font("Helvetica", "B", 8)
+    pdf.cell(22, 7, "Flow", border=1)
+    pdf.cell(38, 7, "Acte", border=1)
+    pdf.cell(28, 7, "Images", border=1)
+    pdf.cell(14, 7, "Nb", border=1)
+    pdf.cell(22, 7, "VO lie", border=1)
+    pdf.cell(0, 7, "Rythme montage", border=1, new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", "", 7)
+    for batch in FLOW_BATCHES:
+        vo_ref = vo_parts_for_range(batch["start"], batch["end"], vo_chunks)
+        pdf.cell(22, 6, batch["id"], border=1)
+        pdf.cell(38, 6, batch["act"][:28], border=1)
+        pdf.cell(28, 6, f"{batch['start']}-{batch['end']}", border=1)
+        pdf.cell(14, 6, str(batch["count"]), border=1)
+        pdf.cell(22, 6, vo_ref[:18], border=1)
+        pdf.cell(0, 6, batch["rythme"], border=1, new_x="LMARGIN", new_y="NEXT")
 
     pdf.output(str(OUTPUT))
     WORKSPACE_OUTPUT.write_bytes(OUTPUT.read_bytes())
