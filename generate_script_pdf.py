@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Generate PDF: full scene-by-scene script + VO chunks (max 40s each)."""
+"""Generate PDF: full scene-by-scene script + VO chunks (max 40s, scene-complete only)."""
 
 from fpdf import FPDF
 from pathlib import Path
 
 OUTPUT = Path("/opt/cursor/artifacts/POV-Sister-OnlyFans-Brother-Script-Complet.pdf")
+WORKSPACE_OUTPUT = Path("/workspace/POV-Sister-OnlyFans-Brother-Script-Complet.pdf")
 
 TITLE = "POV: Your Life As The Sister Of An OnlyFans Brother - The Party Wasn't TikTok"
 
-# Words per 40 seconds at ~145 wpm dramatic narration
+# ~145 wpm dramatic narration -> ~95 words max per 40 sec block
 MAX_WORDS_40S = 95
 
 HOOK = [
@@ -217,6 +218,170 @@ ACTS = [
     },
 ]
 
+# Scenes = unites narratives completes. JAMAIS coupees entre deux blocs VO.
+# Chaque scene se termine sur une phrase / image complete.
+SCENES = [
+    {
+        "name": "HOOK - La fausse party",
+        "lines": HOOK[0:8],  # i1-i8
+    },
+    {
+        "name": "HOOK - Revelation plateformes",
+        "lines": HOOK[8:15],  # i9-i15
+    },
+    {
+        "name": "HOOK - Carte titre",
+        "lines": HOOK[15:17],  # i16-i17
+    },
+    {
+        "name": "HOOK - Ce n'etait pas TikTok",
+        "lines": HOOK[17:28],  # i18-i28
+    },
+    {
+        "name": "ACTE 1 - Vendredi soir (parents absents)",
+        "lines": [("i29", "It started on a Friday."), ("i30", "Mom and Dad left for a wedding in another state."),
+                  ("i31", "You had the house to yourself - or so you thought."),
+                  ("i32", "At 5:47 PM your brother texted the family group chat."),
+                  ("i33", '"Brand party tonight. Don\'t embarrass me."'),
+                  ("i34", 'You replied: "How many people?"'),
+                  ("i35", 'He said: "Just creators."'),
+                  ("i36", "You still didn't understand what that meant.")],
+    },
+    {
+        "name": "ACTE 1 - Les creatrices arrivent",
+        "lines": [("i37", "At 6 PM the doorbell rang."), ("i38", "A girl with a ring light stand."),
+                  ("i39", "Another with a rolling equipment case."), ("i40", "A third in a crop top and heels."),
+                  ('i41', '"Hey! We\'re here for the shoot!"'), ("i42", "Shoot. Not party."),
+                  ("i43", "You looked at your brother."),
+                  ("i44", "He was already pushing the couch against the living room wall.")],
+    },
+    {
+        "name": "ACTE 1 - La maison devient un plateau",
+        "lines": [("i45", "Tripod in the hallway."), ("i46", "Softbox in the kitchen."),
+                  ("i47", "Backdrop taped to the staircase."), ("i48", "Your staircase."),
+                  ('i49', '"Can you stay upstairs?" he said.'), ('i50', '"We\'ve got content to film."'),
+                  ("i51", "You went to your room."), ("i52", "Door closed. Door locked."),
+                  ('i53', 'Downstairs: music, laughter, someone yelling "Action."')],
+    },
+    {
+        "name": "ACTE 1 - Deni (c'est juste de l'influence)",
+        "lines": [("i54", "You told yourself it was influencer stuff."),
+                  ("i55", "Brand deals. Fitness content. Nothing weird."),
+                  ("i56", "But the laughter didn't sound like TikTok."),
+                  ("i57", "It sounded like a set.")],
+    },
+    {
+        "name": "ACTE 1 - La cuisine a minuit",
+        "lines": [("i58", "At 10 PM you needed water."), ("i59", "You crept downstairs."),
+                  ("i60", "The kitchen was empty."),
+                  ("i61", "The counter had makeup wipes, baby oil, and a clipboard with shot lists."),
+                  ("i62", "Shot lists."), ("i63", "Not recipes. Not homework."), ("i64", "Shot lists."),
+                  ("i65", "On the fridge: a whiteboard schedule."),
+                  ('i66', '"Scene 3 - Kitchen Counter - Collab with Jade."'),
+                  ("i67", "Jade was the girl in the crop top."),
+                  ("i68", "You went back upstairs without drinking anything.")],
+    },
+    {
+        "name": "ACTE 2 - Recherche Google",
+        "lines": [("i69", "That night you googled his username."),
+                  ("i70", "On your laptop. Door locked. Volume off."),
+                  ("i71", "The first result wasn't TikTok."), ("i72", "It wasn't Instagram."),
+                  ("i73", "It was a subscription page with his face, his chain, his smile."),
+                  ('i74', '"Exclusive collabs with models."'),
+                  ("i75", "Monthly tiers. Tip menu. Custom requests.")],
+    },
+    {
+        "name": "ACTE 2 - La maison reconnue",
+        "lines": [("i76", "You clicked one preview."), ("i77", "The background looked familiar."),
+                  ("i78", "Your hallway."), ("i79", "Your bathroom mirror."),
+                  ("i80", "The same towel rack Mom bought at Target."), ("i81", "You felt sick."),
+                  ("i82", "Not because of what he was doing with women."),
+                  ("i83", "Because he was doing it where you ate cereal."),
+                  ("i84", "Where Dad grilled on Sundays."),
+                  ("i85", "Where you used to do homework on the floor.")],
+    },
+    {
+        "name": "ACTE 2 - C'est un business",
+        "lines": [("i86", "You scrolled down."), ("i87", "Fansly link in his bio."),
+                  ("i88", "Twitter link."), ("i89", 'A "management" email you had never seen.'),
+                  ("i90", "He wasn't a dancer."), ("i91", "He wasn't a fitness guy."),
+                  ("i92", "He was a business.")],
+    },
+    {
+        "name": "ACTE 2 - Realisation",
+        "lines": [("i93", "Downstairs the music got louder."),
+                  ('i94', 'Someone shouted "Cut!" then laughed.'),
+                  ("i95", "You put in earbuds."), ("i96", "It didn't help."),
+                  ("i97", "You stared at the ceiling and realized your house was a set."),
+                  ("i98", "And you were the only one who didn't get a call time.")],
+    },
+    {
+        "name": "ACTE 3 - Sync iCloud minuit",
+        "lines": [("i99", "At midnight your phone buzzed."), ("i100", "iCloud Family Sharing."),
+                  ("i101", "A photo backup from his phone."), ("i102", "Synced to YOUR camera roll."),
+                  ("i103", "Because you share the same Apple ID."), ("i104", "Mom set it up years ago."),
+                  ('i105', '"So we can see family photos."'), ("i106", "Family photos."),
+                  ("i107", "This wasn't family."), ("i108", "A preview thumbnail appeared on your lock screen."),
+                  ("i109", "You were half asleep."), ("i110", "You swiped it away."), ("i111", "Too slow.")],
+    },
+    {
+        "name": "ACTE 3 - Cafeteria lundi",
+        "lines": [("i112", "Monday morning. School cafeteria."), ("i113", "Your phone on the table."),
+                  ("i114", "Your friend Maya picked it up to show you a meme."),
+                  ("i115", "The photo was still in your Recently Deleted."),
+                  ("i116", "She saw it anyway."), ('i117', '"Is that your brother?"'),
+                  ('i118', '"Is that your HOUSE?"')],
+    },
+    {
+        "name": "ACTE 4 - Rumeurs au lycee",
+        "lines": [("i119", "You snatched the phone back."), ("i120", "Your face was burning."),
+                  ("i121", "Maya's face was worse - excited, horrified, already texting."),
+                  ("i122", "By lunch everyone knew."), ('i123', '"OnlyFans party at her place."'),
+                  ('i124', '"Her brother films girls in their kitchen."'),
+                  ("i125", "Someone made a joke about your fridge."),
+                  ("i126", "You wanted to disappear.")],
+    },
+    {
+        "name": "ACTE 4 - Le mariage (parents voient tout)",
+        "lines": [("i127", "Mom called during fifth period."), ("i128", "Dad had seen the sync too."),
+                  ("i129", "On his iPad."), ("i130", "At the wedding."),
+                  ("i131", "In front of your aunt, your uncle, your grandmother."),
+                  ("i132", "Your uncle asked questions."), ("i133", "Your aunt didn't."),
+                  ("i134", "She just stared at you like you were part of the production.")],
+    },
+    {
+        "name": "ACTE 4 - Echange de textos",
+        "lines": [('i135', 'Your brother texted: "Why is Mom blowing up my phone?"'),
+                  ('i136', 'You texted back: "Because your content synced to the FAMILY iCloud."'),
+                  ("i137", "Three dots. Then nothing.")],
+    },
+    {
+        "name": "ACTE 4 - Confrontation mardi",
+        "lines": [("i138", "He came home Tuesday afternoon."), ("i139", "No apology."),
+                  ('i140', '"It\'s just business," he said.'), ('i141', '"Fans pay. I pay rent."'),
+                  ('i142', '"You used our house."'), ('i143', '"You used our Apple ID."'),
+                  ("i144", "He shrugged like you were the one being dramatic."),
+                  ("i145", "Mom changed the family password that night.")],
+    },
+    {
+        "name": "ACTE 5 - Apres la tempete",
+        "lines": [("i146", "The ring lights went back in the garage."),
+                  ("i147", "The whiteboard came off the fridge."),
+                  ("i148", "The house smelled like hairspray for another week."),
+                  ("i149", "Your brother still posts."), ("i150", "Smaller now. Different locations."),
+                  ('i151', '"Airbnb collabs," he calls them.'), ("i152", "He still wears the chain."),
+                  ("i153", "He still smiles like the camera is always on.")],
+    },
+    {
+        "name": "ACTE 5 - Cloture",
+        "lines": [("i154", "You still share a last name."), ("i155", "You still walk past his closed door."),
+                  ("i156", "You still hear notification sounds at 2 AM."), ("i157", "He never said sorry."),
+                  ("i158", "You never asked him to."),
+                  ("i159", "Some things don't get fixed with a password change."),
+                  ("i160", "The party wasn't TikTok.")],
+    },
+]
+
 
 def word_count(text: str) -> int:
     return len(text.split())
@@ -226,55 +391,62 @@ def estimate_seconds(text: str, wpm: float = 145) -> float:
     return (word_count(text) / wpm) * 60
 
 
-def build_vo_chunks():
-    """Split all narration into VO parts <= 40 seconds (~97 words)."""
-    all_lines = list(HOOK)
-    for act in ACTS:
-        all_lines.extend(act["lines"])
+def scene_words(scene: dict) -> int:
+    return sum(word_count(line) for _, line in scene["lines"])
 
+
+def make_chunk(part_num: int, scenes: list, lines: list) -> dict:
+    text = " ".join(t for _, t in lines)
+    return {
+        "part": part_num,
+        "start": lines[0][0],
+        "end": lines[-1][0],
+        "scenes": [s["name"] for s in scenes],
+        "lines": lines,
+        "text": text,
+        "words": word_count(text),
+        "seconds": round(estimate_seconds(text), 1),
+    }
+
+
+def build_vo_chunks():
+    """
+    Regle stricte : chaque bloc VO contient des scenes COMPLETES uniquement.
+    On ne coupe jamais au milieu d'une scene, d'une phrase ou d'une sequence.
+    """
     chunks = []
+    current_scenes = []
     current_lines = []
     current_words = 0
     part_num = 1
-    start_id = None
 
-    for img_id, line in all_lines:
-        w = word_count(line)
-        if current_lines and current_words + w > MAX_WORDS_40S:
-            chunks.append(
-                {
-                    "part": part_num,
-                    "start": start_id,
-                    "end": current_lines[-1][0],
-                    "lines": current_lines,
-                    "text": " ".join(t for _, t in current_lines),
-                    "words": current_words,
-                    "seconds": round(estimate_seconds(" ".join(t for _, t in current_lines)), 1),
-                }
+    def flush():
+        nonlocal part_num, current_scenes, current_lines, current_words
+        if not current_lines:
+            return
+        chunks.append(make_chunk(part_num, current_scenes, current_lines))
+        part_num += 1
+        current_scenes = []
+        current_lines = []
+        current_words = 0
+
+    for scene in SCENES:
+        sw = scene_words(scene)
+
+        if sw > MAX_WORDS_40S:
+            raise ValueError(
+                f"Scene trop longue pour un seul VO ({sw} mots): {scene['name']}. "
+                "Subdiviser la scene en unites narratives plus petites."
             )
-            part_num += 1
-            current_lines = []
-            current_words = 0
-            start_id = None
 
-        if start_id is None:
-            start_id = img_id
-        current_lines.append((img_id, line))
-        current_words += w
+        if current_lines and current_words + sw > MAX_WORDS_40S:
+            flush()
 
-    if current_lines:
-        chunks.append(
-            {
-                "part": part_num,
-                "start": start_id,
-                "end": current_lines[-1][0],
-                "lines": current_lines,
-                "text": " ".join(t for _, t in current_lines),
-                "words": current_words,
-                "seconds": round(estimate_seconds(" ".join(t for _, t in current_lines)), 1),
-            }
-        )
+        current_scenes.append(scene)
+        current_lines.extend(scene["lines"])
+        current_words += sw
 
+    flush()
     return chunks
 
 
@@ -336,7 +508,6 @@ def generate_pdf():
     pdf.set_auto_page_break(auto=True, margin=20)
     pdf.set_margins(20, 20, 20)
 
-    # --- COVER ---
     pdf.add_page()
     pdf.ln(30)
     pdf.set_font("Helvetica", "B", 16)
@@ -357,11 +528,10 @@ def generate_pdf():
         0,
         6,
         "PARTIE A : Script image par image (i1-i160)\n"
-        "PARTIE B : Scripts VO decoupes (max 40 secondes chacun)",
+        "PARTIE B : Scripts VO (max 40 sec, scenes completes uniquement)",
         align="C",
     )
 
-    # --- TECH SPECS ---
     pdf.add_page()
     pdf.section_title("SPECIFICATIONS TECHNIQUES", 13)
     specs = [
@@ -374,11 +544,17 @@ def generate_pdf():
         "  Hook (i1-i28) : 1 a 1,2 sec par image (~30 sec)",
         "  Corps (i29-i160) : 3 a 4 sec par image",
         "",
+        "REGLE VO ELEVENLABS (IMPORTANT) :",
+        "  Chaque bloc VO se termine a la FIN d'une scene narrative complete.",
+        "  Ne jamais couper au milieu d'une phrase ou d'une sequence.",
+        "  Raison : la voix peut legerement changer entre deux generations.",
+        "  Si on coupe au milieu d'une phrase, la difference devient visible.",
+        "",
         "PERSONNAGES :",
         "  SISTER (POV) | BROTHER (gattouz0 inspired) | MOTHER | FATHER",
         "  MODEL 1 (Jade) | MODEL 2 | MAYA (classmate)",
         "",
-        "PLATEFORMES MENTIONNEES : OnlyFans, Fansly, TikTok, Instagram, Twitter",
+        "PLATEFORMES : OnlyFans, Fansly, TikTok, Instagram, Twitter",
     ]
     for s in specs:
         if not s.strip():
@@ -386,12 +562,10 @@ def generate_pdf():
         else:
             pdf.body_text(s)
 
-    # --- PARTIE A ---
     pdf.add_page()
     pdf.section_title("PARTIE A - SCRIPT COMPLET SCENE PAR SCENE", 14)
     pdf.meta_line("1 phrase = 1 image. Copier chaque ligne pour les prompts Flow.")
 
-    # Hook section
     pdf.sub_title("HOOK RAPIDE - i1 a i28 (~30 sec | 1-1,2 sec/image)")
     for img_id, line in HOOK:
         pdf.scene_line(img_id, line)
@@ -402,13 +576,14 @@ def generate_pdf():
         for img_id, line in act["lines"]:
             pdf.scene_line(img_id, line)
 
-    # --- PARTIE B ---
     vo_chunks = build_vo_chunks()
+
     pdf.add_page()
     pdf.section_title("PARTIE B - SCRIPTS VOICE-OVER (ELEVENLABS)", 14)
     pdf.meta_line(
-        f"Chaque bloc fait maximum 40 secondes (~{MAX_WORDS_40S} mots a 145 mots/min).\n"
-        "Generer un fichier audio par bloc. Coller le texte tel quel dans ElevenLabs."
+        "REGLE : chaque bloc = scenes completes seulement (jamais de coupure mid-scene).\n"
+        f"Maximum ~{MAX_WORDS_40S} mots par bloc (~40 sec a 145 mots/min).\n"
+        "Generer UN fichier audio par bloc. Coller le texte tel quel dans ElevenLabs."
     )
     pdf.ln(2)
     pdf.body_text(f"Nombre total de blocs VO : {len(vo_chunks)}")
@@ -419,33 +594,47 @@ def generate_pdf():
             f"VO PART {chunk['part']} - {chunk['start']} a {chunk['end']} "
             f"| ~{chunk['seconds']} sec | {chunk['words']} mots"
         )
+        pdf.meta_line("Scenes incluses : " + " | ".join(chunk["scenes"]))
         pdf.set_font("Helvetica", "", 10)
         pdf.set_text_color(30, 30, 30)
         pdf.set_x(pdf.l_margin)
         pdf.multi_cell(pdf.epw, 5, chunk["text"])
         pdf.ln(4)
-        if pdf.get_y() > 250:
+        if pdf.get_y() > 245:
             pdf.add_page()
 
-    # --- VO INDEX TABLE ---
     pdf.add_page()
     pdf.section_title("INDEX DES BLOCS VO", 13)
-    pdf.set_font("Helvetica", "B", 9)
-    pdf.cell(25, 7, "Bloc", border=1)
-    pdf.cell(30, 7, "Images", border=1)
-    pdf.cell(25, 7, "Mots", border=1)
-    pdf.cell(25, 7, "Duree", border=1)
-    pdf.cell(0, 7, "Contenu (debut)", border=1, new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", "", 8)
+    pdf.set_font("Helvetica", "B", 8)
+    pdf.cell(22, 7, "Bloc", border=1)
+    pdf.cell(28, 7, "Images", border=1)
+    pdf.cell(18, 7, "Mots", border=1)
+    pdf.cell(18, 7, "Duree", border=1)
+    pdf.cell(0, 7, "Scenes (completes)", border=1, new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", "", 7)
     for chunk in vo_chunks:
-        preview = chunk["text"][:55] + "..." if len(chunk["text"]) > 55 else chunk["text"]
-        pdf.cell(25, 6, f"VO Part {chunk['part']}", border=1)
-        pdf.cell(30, 6, f"{chunk['start']}-{chunk['end']}", border=1)
-        pdf.cell(25, 6, str(chunk["words"]), border=1)
-        pdf.cell(25, 6, f"~{chunk['seconds']}s", border=1)
-        pdf.cell(0, 6, preview, border=1, new_x="LMARGIN", new_y="NEXT")
+        scenes_short = " + ".join(s.split(" - ", 1)[-1][:25] for s in chunk["scenes"])
+        pdf.cell(22, 6, f"Part {chunk['part']}", border=1)
+        pdf.cell(28, 6, f"{chunk['start']}-{chunk['end']}", border=1)
+        pdf.cell(18, 6, str(chunk["words"]), border=1)
+        pdf.cell(18, 6, f"~{chunk['seconds']}s", border=1)
+        pdf.cell(0, 6, scenes_short, border=1, new_x="LMARGIN", new_y="NEXT")
+
+    pdf.add_page()
+    pdf.section_title("LISTE DES SCENES (unites indivisibles)", 13)
+    pdf.meta_line("Ces scenes ne doivent JAMAIS etre reparties entre deux blocs VO differents.")
+    pdf.ln(2)
+    for i, scene in enumerate(SCENES, 1):
+        sw = scene_words(scene)
+        sec = round(estimate_seconds(" ".join(t for _, t in scene["lines"])), 1)
+        start_id = scene["lines"][0][0]
+        end_id = scene["lines"][-1][0]
+        pdf.body_text(
+            f"Scene {i:02d} | {start_id}-{end_id} | ~{sec}s | {sw} mots | {scene['name']}"
+        )
 
     pdf.output(str(OUTPUT))
+    WORKSPACE_OUTPUT.write_bytes(OUTPUT.read_bytes())
     return OUTPUT, vo_chunks
 
 
@@ -455,3 +644,5 @@ if __name__ == "__main__":
     print(f"Blocs VO : {len(chunks)}")
     for c in chunks:
         print(f"  Part {c['part']}: {c['start']}-{c['end']} | {c['words']} mots | ~{c['seconds']}s")
+        for s in c["scenes"]:
+            print(f"    - {s}")
