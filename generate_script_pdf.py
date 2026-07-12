@@ -9,8 +9,12 @@ WORKSPACE_OUTPUT = Path("/workspace/POV-Sister-OnlyFans-Brother-Script-Complet.p
 
 TITLE = "POV: Your Life As The Sister Of An OnlyFans Brother - The Party Wasn't TikTok"
 
-# ~145 wpm dramatic narration -> ~95 words max per 40 sec block
-MAX_WORDS_40S = 95
+# Mesure reelle utilisateur : 321 sec VO pour 160 lignes (13 blocs deja generes)
+VO_REF_SECONDS = 321
+VO_REF_LINES = 160
+SEC_PER_LINE = VO_REF_SECONDS / VO_REF_LINES  # ~2.01 sec/ligne
+MAX_LINES_40S = int(40 / SEC_PER_LINE)  # 19 lignes max par bloc VO (~38 sec)
+EXISTING_VO_PARTS = 13  # VO 1-13 deja generes par l'utilisateur
 
 HOOK = [
     ("i1", "Your brother said he was throwing a party."),
@@ -216,6 +220,156 @@ ACTS = [
             ("i160", "The party wasn't TikTok."),
         ],
     },
+
+    {
+        "name": "ACTE 6 - La semaine d'apres",
+        "pacing": "~3-4 sec/image",
+        "images": "i161-i180",
+        "duration": "~40 sec VO",
+        "lines": [
+            ("i161", "The week after was worse than the party."),
+            ("i162", "Not louder."),
+            ("i163", "Quieter."),
+            ("i164", "The kind of quiet where everyone waits for someone else to speak first."),
+            ("i165", "Mom stopped asking about your day."),
+            ("i166", "Dad stopped making jokes at dinner."),
+            ("i167", "Your brother acted like nothing happened."),
+            ("i168", "He still edited videos at the kitchen table."),
+            ("i169", "With headphones on."),
+            ("i170", "Like the house belonged to his subscribers."),
+            ("i171", "At school the jokes never fully stopped."),
+            ("i172", "They just changed shape."),
+            ("i173", "People didn't say OnlyFans in the hallway anymore."),
+            ("i174", "They just said your brother."),
+            ("i175", "Like that was enough."),
+            ("i176", "Like everyone had already googled the rest."),
+            ("i177", "Maya stayed your friend."),
+            ("i178", "But she stopped sitting with you at lunch."),
+            ("i179", "Not because she hated you."),
+            ("i180", "Because being near you had become a risk."),
+        ],
+    },
+    {
+        "name": "ACTE 7 - La faveur",
+        "pacing": "~3-4 sec/image",
+        "images": "i181-i198",
+        "duration": "~36 sec VO",
+        "lines": [
+            ("i181", "Social risk."),
+            ("i182", "The kind teenagers understand better than adults."),
+            ("i183", "That Friday your brother knocked on your door."),
+            ("i184", "First time in months he knocked."),
+            ("i185", "He said he needed a favor."),
+            ("i186", "Don't say it like that, you told him."),
+            ("i187", "He smiled anyway."),
+            ("i188", "The smile that works on camera."),
+            ("i189", "Not the one he used when you were kids."),
+            ("i190", "He needed a ride to a studio across town."),
+            ('i191', '"Management booked it," he said.'),
+            ('i192', '"It\'s professional now."'),
+            ("i193", "You drove because you were tired of feeling powerless."),
+            ("i194", "Or because you still loved him."),
+            ("i195", "Probably both."),
+            ("i196", "Ring lights in the lobby."),
+            ("i197", "Your brother walked in like he owned the place."),
+            ("i198", "You stayed in the car."),
+        ],
+    },
+    {
+        "name": "ACTE 8 - Menaces",
+        "pacing": "~3-4 sec/image",
+        "images": "i199-i216",
+        "duration": "~36 sec VO",
+        "lines": [
+            ("i199", "Forty minutes later he came out counting money on his phone."),
+            ('i200', '"This is one afternoon," he said.'),
+            ("i201", "It was more than Mom made in two weeks at the hospital."),
+            ('i202', 'He said, "You could help me. Just drive. Just keep quiet."'),
+            ('i203', 'You said, "You turned our kitchen into a set."'),
+            ('i204', 'He said, "I turned our kitchen into rent."'),
+            ("i205", "That night Dad found an envelope in the mailbox."),
+            ("i206", "No stamp. No name."),
+            ("i207", "Inside was a printed screenshot of your house."),
+            ("i208", "Your brother's face circled in red marker."),
+            ('i209', 'Written underneath: "We know where the scenes are filmed."'),
+            ("i210", "Dad didn't scream this time."),
+            ("i211", "He just sat at the table holding that paper."),
+            ("i212", "Mom called the police."),
+            ("i213", "Your brother said fans get obsessed."),
+            ('i214', '"It\'s normal," he said.'),
+            ("i215", "Nothing about this felt normal."),
+            ("i216", "A boy from your school DM'd you the next week."),
+        ],
+    },
+    {
+        "name": "ACTE 9 - Il demenage",
+        "pacing": "~3-4 sec/image",
+        "images": "i217-i231",
+        "duration": "~30 sec VO",
+        "lines": [
+            ("i217", "He recognized the staircase in a preview."),
+            ("i218", "He said he lived two blocks away."),
+            ("i219", "You blocked him and sent the screenshot to Mom."),
+            ("i220", "Your brother posted a family boundary video."),
+            ("i221", "Not your name. Not your face."),
+            ("i222", "But everyone knew who he meant."),
+            ("i223", "Comments called you controlling."),
+            ("i224", "Comments asked if you had an account too."),
+            ("i225", "On a Tuesday Mom made an announcement at dinner."),
+            ("i226", "Your brother had to move out by the first of next month."),
+            ("i227", "He laughed. Then saw her face. Then stopped laughing."),
+            ("i228", "He moved into a one-bedroom near downtown."),
+            ("i229", "Box fans instead of ring lights."),
+            ("i230", "Smaller audience. Bigger excuses."),
+            ("i231", "You left his texts on read."),
+        ],
+    },
+    {
+        "name": "ACTE 10 - Nouvelle ecole",
+        "pacing": "~3-4 sec/image",
+        "images": "i232-i243",
+        "duration": "~24 sec VO",
+        "lines": [
+            ("i232", "Two months later someone tagged you in a fan edit."),
+            ("i233", "Your front door in the background."),
+            ("i234", "Your last name in the caption."),
+            ("i235", "The internet doesn't forget. It archives."),
+            ("i236", "You changed schools the following semester."),
+            ("i237", "New hallway. New cafeteria."),
+            ("i238", "No one knew your brother."),
+            ("i239", "For three weeks that felt like peace."),
+            ('i240', 'Then a girl in chemistry class said, "Wait, aren\'t you-"'),
+            ('i241', 'You said, "No." Too fast. Too loud.'),
+            ("i242", "She blinked and changed the subject."),
+            ("i243", "You knew she would search later."),
+        ],
+    },
+    {
+        "name": "ACTE 11 - Cloture finale",
+        "pacing": "~3-4 sec/image",
+        "images": "i244-i260",
+        "duration": "~34 sec VO",
+        "lines": [
+            ("i244", "Your brother called on your birthday."),
+            ("i245", "He said he missed how things used to be."),
+            ("i246", "Before ring lights. Before Apple IDs. Before the house became content."),
+            ("i247", "You asked if he was going to apologize."),
+            ('i248', 'He said, "I didn\'t think I did anything wrong."'),
+            ("i249", "You hung up."),
+            ("i250", "Last month you found an old photo on your camera roll."),
+            ("i251", "You and him on the porch swing."),
+            ("i252", "Before subscribers. Before collabs."),
+            ("i253", "You didn't delete it. You didn't post it either."),
+            ("i254", "Some things aren't content."),
+            ("i255", "He still posts. Different city. Same smile."),
+            ("i256", "You still don't follow him. But sometimes you check."),
+            ("i257", "Not to watch. To know if your hallway is still out there."),
+            ("i258", "It isn't. Not anymore."),
+            ("i259", "You keep your curtains closed after six."),
+            ("i260", "The party wasn't TikTok. And you are still learning what it actually was."),
+        ],
+    },
+
 ]
 
 # Scenes = unites narratives completes. JAMAIS coupees entre deux blocs VO.
@@ -380,6 +534,124 @@ SCENES = [
                   ("i159", "Some things don't get fixed with a password change."),
                   ("i160", "The party wasn't TikTok.")],
     },
+    {
+        "name": "ACTE 6 - Silence a la maison",
+        "lines": [
+            ("i161", "The week after was worse than the party."), ("i162", "Not louder."),
+            ("i163", "Quieter."),
+            ("i164", "The kind of quiet where everyone waits for someone else to speak first."),
+            ("i165", "Mom stopped asking about your day."), ("i166", "Dad stopped making jokes at dinner."),
+            ("i167", "Your brother acted like nothing happened."),
+            ("i168", "He still edited videos at the kitchen table."), ("i169", "With headphones on."),
+            ("i170", "Like the house belonged to his subscribers."),
+        ],
+    },
+    {
+        "name": "ACTE 6 - Ecole et Maya",
+        "lines": [
+            ("i171", "At school the jokes never fully stopped."), ("i172", "They just changed shape."),
+            ("i173", "People didn't say OnlyFans in the hallway anymore."),
+            ("i174", "They just said your brother."), ("i175", "Like that was enough."),
+            ("i176", "Like everyone had already googled the rest."),
+            ("i177", "Maya stayed your friend."), ("i178", "But she stopped sitting with you at lunch."),
+            ("i179", "Not because she hated you."),
+            ("i180", "Because being near you had become a risk."),
+        ],
+    },
+    {
+        "name": "ACTE 7 - La faveur",
+        "lines": [
+            ("i181", "Social risk."), ("i182", "The kind teenagers understand better than adults."),
+            ("i183", "That Friday your brother knocked on your door."),
+            ("i184", "First time in months he knocked."), ("i185", "He said he needed a favor."),
+            ("i186", "Don't say it like that, you told him."), ("i187", "He smiled anyway."),
+            ("i188", "The smile that works on camera."),
+            ("i189", "Not the one he used when you were kids."),
+            ("i190", "He needed a ride to a studio across town."),
+            ('i191', '"Management booked it," he said.'), ('i192', '"It\'s professional now."'),
+            ("i193", "You drove because you were tired of feeling powerless."),
+            ("i194", "Or because you still loved him."), ("i195", "Probably both."),
+            ("i196", "Ring lights in the lobby."),
+            ("i197", "Your brother walked in like he owned the place."),
+            ("i198", "You stayed in the car."),
+        ],
+    },
+    {
+        "name": "ACTE 8 - Menaces",
+        "lines": [
+            ("i199", "Forty minutes later he came out counting money on his phone."),
+            ('i200', '"This is one afternoon," he said.'),
+            ("i201", "It was more than Mom made in two weeks at the hospital."),
+            ('i202', 'He said, "You could help me. Just drive. Just keep quiet."'),
+            ('i203', 'You said, "You turned our kitchen into a set."'),
+            ('i204', 'He said, "I turned our kitchen into rent."'),
+            ("i205", "That night Dad found an envelope in the mailbox."),
+            ("i206", "No stamp. No name."),
+            ("i207", "Inside was a printed screenshot of your house."),
+            ("i208", "Your brother's face circled in red marker."),
+            ('i209', 'Written underneath: "We know where the scenes are filmed."'),
+            ("i210", "Dad didn't scream this time."),
+            ("i211", "He just sat at the table holding that paper."),
+            ("i212", "Mom called the police."), ("i213", "Your brother said fans get obsessed."),
+            ('i214', '"It\'s normal," he said.'), ("i215", "Nothing about this felt normal."),
+            ("i216", "A boy from your school DM'd you the next week."),
+        ],
+    },
+    {
+        "name": "ACTE 9 - Il demenage",
+        "lines": [
+            ("i217", "He recognized the staircase in a preview."),
+            ("i218", "He said he lived two blocks away."),
+            ("i219", "You blocked him and sent the screenshot to Mom."),
+            ("i220", "Your brother posted a family boundary video."),
+            ("i221", "Not your name. Not your face."), ("i222", "But everyone knew who he meant."),
+            ("i223", "Comments called you controlling."),
+            ("i224", "Comments asked if you had an account too."),
+            ("i225", "On a Tuesday Mom made an announcement at dinner."),
+            ("i226", "Your brother had to move out by the first of next month."),
+            ("i227", "He laughed. Then saw her face. Then stopped laughing."),
+            ("i228", "He moved into a one-bedroom near downtown."),
+            ("i229", "Box fans instead of ring lights."),
+            ("i230", "Smaller audience. Bigger excuses."), ("i231", "You left his texts on read."),
+        ],
+    },
+    {
+        "name": "ACTE 10 - Nouvelle ecole",
+        "lines": [
+            ("i232", "Two months later someone tagged you in a fan edit."),
+            ("i233", "Your front door in the background."), ("i234", "Your last name in the caption."),
+            ("i235", "The internet doesn't forget. It archives."),
+            ("i236", "You changed schools the following semester."),
+            ("i237", "New hallway. New cafeteria."), ("i238", "No one knew your brother."),
+            ("i239", "For three weeks that felt like peace."),
+            ('i240', 'Then a girl in chemistry class said, "Wait, aren\'t you-"'),
+            ('i241', 'You said, "No." Too fast. Too loud.'),
+            ("i242", "She blinked and changed the subject."),
+            ("i243", "You knew she would search later."),
+        ],
+    },
+    {
+        "name": "ACTE 11 - Cloture finale",
+        "lines": [
+            ("i244", "Your brother called on your birthday."),
+            ("i245", "He said he missed how things used to be."),
+            ("i246", "Before ring lights. Before Apple IDs. Before the house became content."),
+            ("i247", "You asked if he was going to apologize."),
+            ('i248', 'He said, "I didn\'t think I did anything wrong."'),
+            ("i249", "You hung up."),
+            ("i250", "Last month you found an old photo on your camera roll."),
+            ("i251", "You and him on the porch swing."),
+            ("i252", "Before subscribers. Before collabs."),
+            ("i253", "You didn't delete it. You didn't post it either."),
+            ("i254", "Some things aren't content."),
+            ("i255", "He still posts. Different city. Same smile."),
+            ("i256", "You still don't follow him. But sometimes you check."),
+            ("i257", "Not to watch. To know if your hallway is still out there."),
+            ("i258", "It isn't. Not anymore."), ("i259", "You keep your curtains closed after six."),
+            ("i260", "The party wasn't TikTok. And you are still learning what it actually was."),
+        ],
+    },
+
 ]
 
 
@@ -387,16 +659,25 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
-def estimate_seconds(text: str, wpm: float = 145) -> float:
-    return (word_count(text) / wpm) * 60
+def estimate_seconds_from_lines(n_lines: int) -> float:
+    return n_lines * SEC_PER_LINE
+
+
+def estimate_seconds_text(text: str) -> float:
+    return estimate_seconds_from_lines(len(text.split()))
+
+
+def scene_lines_count(scene: dict) -> int:
+    return len(scene["lines"])
 
 
 def scene_words(scene: dict) -> int:
     return sum(word_count(line) for _, line in scene["lines"])
 
 
-def make_chunk(part_num: int, scenes: list, lines: list) -> dict:
+def make_chunk(part_num: int, scenes: list, lines: list, is_new: bool = False) -> dict:
     text = " ".join(t for _, t in lines)
+    n = len(lines)
     return {
         "part": part_num,
         "start": lines[0][0],
@@ -405,48 +686,72 @@ def make_chunk(part_num: int, scenes: list, lines: list) -> dict:
         "lines": lines,
         "text": text,
         "words": word_count(text),
-        "seconds": round(estimate_seconds(text), 1),
+        "lines_count": n,
+        "seconds": round(estimate_seconds_from_lines(n), 1),
+        "is_new": is_new,
     }
+
+
+# Regroupement FIXE des 13 premiers VO (deja generes par l'utilisateur)
+EXISTING_VO_SCENE_GROUPS = [
+    [0, 1, 2],       # VO 1  i1-i17
+    [3],             # VO 2  i18-i28
+    [4],             # VO 3  i29-i36
+    [5, 6],          # VO 4  i37-i53
+    [7, 8],          # VO 5  i54-i68
+    [9],             # VO 6  i69-i75
+    [10, 11],        # VO 7  i76-i92
+    [12],            # VO 8  i93-i98
+    [13],            # VO 9  i99-i111
+    [14, 15],        # VO 10 i112-i126
+    [16, 17],        # VO 11 i127-i137
+    [18, 19],        # VO 12 i138-i153
+    [20],            # VO 13 i154-i160
+]
+EXTENSION_SCENE_START = 21  # index premiere scene extension dans SCENES
 
 
 def build_vo_chunks():
     """
-    Regle stricte : chaque bloc VO contient des scenes COMPLETES uniquement.
-    On ne coupe jamais au milieu d'une scene, d'une phrase ou d'une sequence.
+    VO 1-13 : regroupement FIXE (deja generes, ne pas modifier).
+    VO 14+  : scenes extension uniquement, pack par scenes completes, max 19 lignes.
     """
     chunks = []
+
+    for part_idx, scene_indices in enumerate(EXISTING_VO_SCENE_GROUPS, start=1):
+        scenes = [SCENES[i] for i in scene_indices]
+        lines = []
+        for s in scenes:
+            lines.extend(s["lines"])
+        chunks.append(make_chunk(part_idx, scenes, lines, is_new=False))
+
+    ext_scenes = SCENES[EXTENSION_SCENE_START:]
     current_scenes = []
     current_lines = []
-    current_words = 0
-    part_num = 1
+    current_line_count = 0
+    part_num = EXISTING_VO_PARTS + 1
 
-    def flush():
-        nonlocal part_num, current_scenes, current_lines, current_words
+    def flush_ext():
+        nonlocal part_num, current_scenes, current_lines, current_line_count
         if not current_lines:
             return
-        chunks.append(make_chunk(part_num, current_scenes, current_lines))
+        chunks.append(make_chunk(part_num, current_scenes, current_lines, is_new=True))
         part_num += 1
         current_scenes = []
         current_lines = []
-        current_words = 0
+        current_line_count = 0
 
-    for scene in SCENES:
-        sw = scene_words(scene)
-
-        if sw > MAX_WORDS_40S:
-            raise ValueError(
-                f"Scene trop longue pour un seul VO ({sw} mots): {scene['name']}. "
-                "Subdiviser la scene en unites narratives plus petites."
-            )
-
-        if current_lines and current_words + sw > MAX_WORDS_40S:
-            flush()
-
+    for scene in ext_scenes:
+        sl = scene_lines_count(scene)
+        if sl > MAX_LINES_40S:
+            raise ValueError(f"Scene extension trop longue ({sl} lignes): {scene['name']}")
+        if current_lines and current_line_count + sl > MAX_LINES_40S:
+            flush_ext()
         current_scenes.append(scene)
         current_lines.extend(scene["lines"])
-        current_words += sw
+        current_line_count += sl
 
-    flush()
+    flush_ext()
     return chunks
 
 
@@ -519,7 +824,7 @@ def generate_pdf():
         0,
         7,
         "Script complet scene par scene + scripts Voice-Over (ElevenLabs)\n"
-        "160 images | ~8 min 20 | Hook rapide (30 sec) + corps lent (3-4 sec/image)",
+        "260 images | ~8 min 40 VO (mesure reelle) | Hook rapide + corps lent",
         align="C",
     )
     pdf.ln(15)
@@ -537,12 +842,15 @@ def generate_pdf():
     specs = [
         "Titre YouTube : " + TITLE,
         "Format : POV storytime animation (stick figure minimaliste)",
-        "Total images : 160 (i1 a i160)",
-        "Duree estimee : ~8 min 20",
+        "Total images : 260 (i1 a i260)",
+        "Duree VO estimee : ~522 sec (~8.7 min)",
         "",
         "RYTHME MONTAGE :",
         "  Hook (i1-i28) : 1 a 1,2 sec par image (~30 sec)",
-        "  Corps (i29-i160) : 3 a 4 sec par image",
+        "  Corps (i29-i260) : 3 a 4 sec par image",
+        "",
+        "TIMING VO REEL (mesure utilisateur) : 321 sec / 160 lignes = ~2.01 sec/ligne.",
+        "  260 lignes = ~522 sec (~8 min 42). Extension i161-i260 = ~201 sec (~3 min 21).",
         "",
         "REGLE VO ELEVENLABS (IMPORTANT) :",
         "  Chaque bloc VO se termine a la FIN d'une scene narrative complete.",
@@ -582,17 +890,18 @@ def generate_pdf():
     pdf.section_title("PARTIE B - SCRIPTS VOICE-OVER (ELEVENLABS)", 14)
     pdf.meta_line(
         "REGLE : chaque bloc = scenes completes seulement (jamais de coupure mid-scene).\n"
-        f"Maximum ~{MAX_WORDS_40S} mots par bloc (~40 sec a 145 mots/min).\n"
-        "Generer UN fichier audio par bloc. Coller le texte tel quel dans ElevenLabs."
+        f"Maximum ~{MAX_LINES_40S} lignes par bloc (~{round(MAX_LINES_40S * SEC_PER_LINE, 0):.0f} sec, mesure reelle).\n"
+        "VO 1-13 deja generes. Generer seulement VO 14+ (marques NOUVEAU)."
     )
     pdf.ln(2)
     pdf.body_text(f"Nombre total de blocs VO : {len(vo_chunks)}")
     pdf.ln(3)
 
     for chunk in vo_chunks:
+        label = " [NOUVEAU - A GENERER]" if chunk.get("is_new") else " [DEJA GENERE]"
         pdf.sub_title(
-            f"VO PART {chunk['part']} - {chunk['start']} a {chunk['end']} "
-            f"| ~{chunk['seconds']} sec | {chunk['words']} mots"
+            f"VO PART {chunk['part']}{label} - {chunk['start']} a {chunk['end']} "
+            f"| ~{chunk['seconds']} sec | {chunk['lines_count']} lignes"
         )
         pdf.meta_line("Scenes incluses : " + " | ".join(chunk["scenes"]))
         pdf.set_font("Helvetica", "", 10)
@@ -626,7 +935,7 @@ def generate_pdf():
     pdf.ln(2)
     for i, scene in enumerate(SCENES, 1):
         sw = scene_words(scene)
-        sec = round(estimate_seconds(" ".join(t for _, t in scene["lines"])), 1)
+        sec = round(estimate_seconds_from_lines(len(scene["lines"])), 1)
         start_id = scene["lines"][0][0]
         end_id = scene["lines"][-1][0]
         pdf.body_text(
