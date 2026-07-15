@@ -11,7 +11,8 @@ TITLE = "POV: Your Life As Lamine Yamal's Little Brother - The World Cup Changed
 
 HOOK_SEC_PER_LINE = 1.5
 BODY_SEC_PER_LINE = 3.5
-MAX_LINES_40S = 11  # ~38 sec at 3.5 sec/line (corps)
+MAX_VO_SECONDS = 60  # max 1 minute par bloc ElevenLabs
+HOOK_IMAGE_COUNT = 28  # i1-i28
 
 HOOK = [
     ("i1", "July 14th."),
@@ -362,7 +363,6 @@ ACTS = [
             ("i245", "He didn't smile yet. Then he smiled."),
             ("i246", "I knew before the screen showed it."),
             ("i247", "Spain won."),
-            ("i248", "NOTE PRODUCTION: remplacer i247 si resultat different."),
             ("i249", "Lamine didn't lift the trophy first."),
             ("i250", "He looked for me."),
             ("i251", "I was there."),
@@ -388,22 +388,29 @@ MATCH_FACTS = [
     ("19 Jul", "Spain vs TBD", "MetLife Stadium", "East Rutherford, USA", "FINAL - valider score"),
 ]
 
+# Unites narratives indivisibles : 1 scene = 1 bloc VO (jamais couper une scene).
+# Chaque scene doit tenir en <= 60 sec (voir scene_duration_seconds).
 SCENES = [
-    {"name": "HOOK - 14 juillet demi-finale", "lines": HOOK[0:16]},
-    {"name": "HOOK - Keyne et retour Atlanta", "lines": HOOK[16:26]},
-    {"name": "HOOK - Carte titre", "lines": HOOK[26:28]},
-    {"name": "ACTE 1 - Premier match Atlanta", "lines": ACTS[0]["lines"]},
-    {"name": "ACTE 2 - Quatre-zero Arabie", "lines": ACTS[1]["lines"]},
-    {"name": "ACTE 3 - Mexique Guadalajara", "lines": ACTS[2]["lines"]},
-    {"name": "ACTE 4 - Vamos viral Autriche", "lines": ACTS[3]["lines"]},
-    {"name": "ACTE 5 - CR7 tribune et tunnel", "lines": ACTS[4]["lines"][:16]},
-    {"name": "ACTE 5 - CR7 apres-match", "lines": ACTS[4]["lines"][16:]},
-    {"name": "ACTE 6 - Ecran geant Belgique", "lines": ACTS[5]["lines"]},
+    {"name": "HOOK - Complet (14 juillet -> Atlanta)", "lines": list(HOOK)},
+    {"name": "ACTE 1A - Tribune Atlanta 0-0", "lines": ACTS[0]["lines"][0:12]},
+    {"name": "ACTE 1B - Apres-match Lamine", "lines": ACTS[0]["lines"][12:22]},
+    {"name": "ACTE 2A - Quatre buts Arabie", "lines": ACTS[1]["lines"][0:11]},
+    {"name": "ACTE 2B - Familles tribune", "lines": ACTS[1]["lines"][11:22]},
+    {"name": "ACTE 3A - Match Guadalajara", "lines": ACTS[2]["lines"][0:14]},
+    {"name": "ACTE 3B - Tacos et langue", "lines": ACTS[2]["lines"][14:20]},
+    {"name": "ACTE 4A - Vamos Autriche", "lines": ACTS[3]["lines"][0:12]},
+    {"name": "ACTE 4B - Ecran geant et citation", "lines": ACTS[3]["lines"][12:21]},
+    {"name": "ACTE 4C - Toujours debout pour Lamine", "lines": ACTS[3]["lines"][21:26]},
+    {"name": "ACTE 5A - CR7 tribune et match", "lines": ACTS[4]["lines"][0:16]},
+    {"name": "ACTE 5B - CR7 tunnel apres-match", "lines": ACTS[4]["lines"][16:30]},
+    {"name": "ACTE 6A - Belgique ecran geant", "lines": ACTS[5]["lines"][0:14]},
+    {"name": "ACTE 6B - Glace et rires", "lines": ACTS[5]["lines"][14:22]},
     {"name": "ACTE 7 - Anniversaire 13 juillet", "lines": ACTS[6]["lines"]},
-    {"name": "ACTE 8 - Demi France 14 juillet", "lines": ACTS[7]["lines"][:16]},
-    {"name": "ACTE 8 - Calin et depart NYC", "lines": ACTS[7]["lines"][16:]},
-    {"name": "ACTE 9 - Veille finale", "lines": ACTS[8]["lines"]},
-    {"name": "ACTE 10 - Finale 19 juillet", "lines": ACTS[9]["lines"]},
+    {"name": "ACTE 8A - Demi France match", "lines": ACTS[7]["lines"][0:16]},
+    {"name": "ACTE 8B - Calin et depart NYC", "lines": ACTS[7]["lines"][16:32]},
+    {"name": "ACTE 9 - Veille finale NYC", "lines": ACTS[8]["lines"]},
+    {"name": "ACTE 10A - Finale match", "lines": ACTS[9]["lines"][0:15]},
+    {"name": "ACTE 10B - Fin Keyne", "lines": ACTS[9]["lines"][15:]},
 ]
 
 FLOW_BATCHES = [
@@ -424,7 +431,7 @@ FLOW_BATCHES = [
     {"id": "Acte8-A", "act": "ACTE 8 Demi 14 jul", "start": "i187", "end": "i202", "count": 16, "rythme": "3-4 sec/image"},
     {"id": "Acte8-B", "act": "ACTE 8 Demi 14 jul", "start": "i203", "end": "i218", "count": 16, "rythme": "3-4 sec/image"},
     {"id": "Acte9", "act": "ACTE 9 Veille finale", "start": "i219", "end": "i232", "count": 14, "rythme": "3-4 sec/image"},
-    {"id": "Acte10-A", "act": "ACTE 10 Finale 19 jul", "start": "i233", "end": "i248", "count": 16, "rythme": "3-4 sec/image"},
+    {"id": "Acte10-A", "act": "ACTE 10 Finale 19 jul", "start": "i233", "end": "i247", "count": 15, "rythme": "3-4 sec/image"},
     {"id": "Acte10-B", "act": "ACTE 10 Finale 19 jul", "start": "i249", "end": "i258", "count": 10, "rythme": "3-4 sec/image"},
 ]
 
@@ -456,16 +463,20 @@ def lines_for_image_range(start_id: str, end_id: str):
     return [(img_id, text) for img_id, text in get_all_script_lines() if si <= int(img_id[1:]) <= ei]
 
 
-def scene_lines_count(scene: dict) -> int:
-    return len(scene["lines"])
+def line_duration_seconds(img_id: str) -> float:
+    if int(img_id[1:]) <= HOOK_IMAGE_COUNT:
+        return HOOK_SEC_PER_LINE
+    return BODY_SEC_PER_LINE
+
+
+def scene_duration_seconds(scene: dict) -> float:
+    return sum(line_duration_seconds(img_id) for img_id, _ in scene["lines"])
 
 
 def make_chunk(part_num: int, scenes: list, lines: list) -> dict:
     text = " ".join(t for _, t in lines)
     n = len(lines)
-    hook_lines = sum(1 for img_id, _ in lines if int(img_id[1:]) <= len(HOOK))
-    body_lines = n - hook_lines
-    seconds = round(hook_lines * HOOK_SEC_PER_LINE + body_lines * BODY_SEC_PER_LINE, 1)
+    seconds = round(sum(line_duration_seconds(img_id) for img_id, _ in lines), 1)
     return {
         "part": part_num,
         "start": lines[0][0],
@@ -480,45 +491,22 @@ def make_chunk(part_num: int, scenes: list, lines: list) -> dict:
 
 
 def build_vo_chunks():
+    """
+    Regle stricte : 1 scene narrative = 1 bloc VO.
+    - Jamais couper une scene entre deux blocs.
+    - Jamais couper une phrase (1 phrase = 1 image, fin de scene = fin de phrase).
+    - Chaque bloc <= 60 sec max.
+    - Le bloc suivant commence toujours une nouvelle scene.
+    """
     chunks = []
-    current_scenes = []
-    current_lines = []
-    current_line_count = 0
-    part_num = 1
-
-    def flush():
-        nonlocal part_num, current_scenes, current_lines, current_line_count
-        if not current_lines:
-            return
-        chunks.append(make_chunk(part_num, current_scenes, current_lines))
-        part_num += 1
-        current_scenes = []
-        current_lines = []
-        current_line_count = 0
-
-    for scene in SCENES:
-        sl = scene_lines_count(scene)
-        if sl > MAX_LINES_40S and scene["name"].startswith("ACTE 5"):
-            mid = sl // 2
-            sub_scenes = [
-                {"name": scene["name"] + " (1)", "lines": scene["lines"][:mid]},
-                {"name": scene["name"] + " (2)", "lines": scene["lines"][mid:]},
-            ]
-            for sub in sub_scenes:
-                ssl = len(sub["lines"])
-                if current_lines and current_line_count + ssl > MAX_LINES_40S:
-                    flush()
-                current_scenes.append(sub)
-                current_lines.extend(sub["lines"])
-                current_line_count += ssl
-            continue
-        if current_lines and current_line_count + sl > MAX_LINES_40S:
-            flush()
-        current_scenes.append(scene)
-        current_lines.extend(scene["lines"])
-        current_line_count += sl
-
-    flush()
+    for part_num, scene in enumerate(SCENES, start=1):
+        dur = scene_duration_seconds(scene)
+        if dur > MAX_VO_SECONDS:
+            raise ValueError(
+                f"Scene trop longue ({dur:.1f}s > {MAX_VO_SECONDS}s): {scene['name']}. "
+                "Subdiviser la scene dans SCENES."
+            )
+        chunks.append(make_chunk(part_num, [scene], scene["lines"]))
     return chunks
 
 
@@ -635,9 +623,11 @@ def generate_pdf():
         f"  Corps (i{len(HOOK)+1}-i{n_img}) : 3 a 4 sec par image",
         "",
         "REGLE VO ELEVENLABS (IMPORTANT) :",
-        "  Chaque bloc VO se termine a la FIN d'une scene narrative complete.",
+        "  1 scene narrative = 1 bloc VO (jamais couper une scene).",
+        "  Chaque bloc VO <= 60 secondes maximum.",
         "  Ne jamais couper au milieu d'une phrase ou d'une sequence.",
-        "  Raison : la voix peut legerement changer entre deux generations.",
+        "  Le bloc suivant commence TOUJOURS une nouvelle scene (voix peut changer).",
+        "  Raison : la voix ElevenLabs peut varier entre deux generations.",
         "",
         "REGLE MATCHS (CRITIQUE) :",
         "  Tous les scores, dates, stades et buteurs = FAITS REELS FIFA 2026.",
@@ -680,9 +670,8 @@ def generate_pdf():
     pdf.add_page()
     pdf.section_title("PARTIE B - SCRIPTS VOICE-OVER (ELEVENLABS)", 14)
     pdf.meta_line(
-        "REGLE : chaque bloc = scenes completes seulement (jamais de coupure mid-scene).\n"
-        f"Maximum ~{MAX_LINES_40S} lignes corps par bloc (~40 sec).\n"
-        "Generer tous les blocs VO dans l'ordre."
+        "REGLE : 1 scene = 1 bloc VO. Jamais couper une scene. Max 60 sec par bloc.\n"
+        "Generer chaque VO separement dans l'ordre (VO 1, puis VO 2, etc.)."
     )
     pdf.ln(2)
     pdf.body_text(f"Nombre total de blocs VO : {len(vo_chunks)}")
@@ -693,7 +682,7 @@ def generate_pdf():
             f"VO PART {chunk['part']} - {chunk['start']} a {chunk['end']} "
             f"| ~{chunk['seconds']} sec | {chunk['lines_count']} lignes"
         )
-        pdf.meta_line("Scenes incluses : " + " | ".join(chunk["scenes"]))
+        pdf.meta_line("Scenes incluses : " + chunk["scenes"][0])
         pdf.set_font("Helvetica", "", 10)
         pdf.set_text_color(30, 30, 30)
         pdf.set_x(pdf.l_margin)
@@ -701,6 +690,21 @@ def generate_pdf():
         pdf.ln(4)
         if pdf.get_y() > 245:
             pdf.add_page()
+
+    pdf.add_page()
+    pdf.section_title("LISTE DES SCENES VO (unites indivisibles)", 13)
+    pdf.meta_line(
+        "Chaque scene = exactement 1 bloc VO. Ne jamais repartir une scene entre deux blocs."
+    )
+    pdf.ln(2)
+    for i, scene in enumerate(SCENES, 1):
+        dur = scene_duration_seconds(scene)
+        start_id = scene["lines"][0][0]
+        end_id = scene["lines"][-1][0]
+        pdf.body_text(
+            f"Scene {i:02d} = VO {i:02d} | {start_id}-{end_id} | "
+            f"~{dur:.0f}s | {len(scene['lines'])} lignes | {scene['name']}"
+        )
 
     pdf.add_page()
     pdf.section_title("INDEX DES BLOCS VO", 13)
