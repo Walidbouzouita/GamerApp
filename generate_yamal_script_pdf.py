@@ -341,37 +341,37 @@ ACTS = [
         ],
     },
     {
-        "name": "ACTE 10 - Suspense finale",
+        "name": "ACTE 10 - Teaser Part 2 (finale 19 juillet)",
         "pacing": "~3-4 sec/image",
         "images": "i233-i258",
-        "duration": "~1 min 30",
-        "stadium": "MetLife Stadium (New York New Jersey Stadium), East Rutherford, USA",
-        "match": "FINALE - Spain vs Argentina (suspense cliffhanger - sans resultat)",
+        "duration": "~50 sec",
+        "stadium": "MetLife Stadium - teaser Part 2 (pas le match)",
+        "match": "TEASER Part 2 - finale Spain vs Argentina le 19 juillet",
         "lines": [
-            ("i233", "The final was coming."),
-            ("i234", "Spain versus Argentina."),
-            ("i235", "MetLife Stadium. Eighty-two thousand seats."),
-            ("i236", "I had the last ticket. Mom hid it in her bag."),
-            ("i237", "We walked through the crowds."),
-            ("i238", "So many cameras. So many flags."),
-            ("i239", 'Lamine texted: "Don\'t run."'),
-            ("i240", 'I said: "I won\'t."'),
-            ("i241", "Mom didn't believe me."),
-            ("i242", "The tunnel was ahead."),
-            ("i243", "I could hear the stadium humming."),
-            ("i244", "Like a giant heartbeat."),
-            ("i245", "Lamine was somewhere down there."),
-            ("i246", "I wasn't."),
-            ("i247", "Not yet."),
-            ("i249", "Mom squeezed my hand."),
-            ("i250", "The noise got louder."),
-            ("i251", "The ground shook."),
-            ("i252", "Three years old. Almost four."),
-            ("i253", "I didn't know what would happen next."),
-            ("i254", "Nobody did."),
-            ("i255", "That's what Mom said."),
-            ("i256", "Then the doors opened."),
-            ("i257", "And everything went quiet."),
+            ("i233", "But the story doesn't end here."),
+            ("i234", "July 19th."),
+            ("i235", "The final."),
+            ("i236", "Spain versus Argentina."),
+            ("i237", "MetLife Stadium."),
+            ("i238", "Lamine's biggest night."),
+            ("i239", "And I'm not done yet."),
+            ("i240", "I still have my ticket."),
+            ("i241", "Mom says we're going back."),
+            ("i242", "The whole world will be watching."),
+            ("i243", "So will I."),
+            ("i244", "From the stands."),
+            ("i245", "Or maybe the tunnel."),
+            ("i246", 'Mom says no.'),
+            ("i247", 'I say we\'ll see.'),
+            ("i249", "If you made it this far..."),
+            ("i250", "Thank you for watching."),
+            ("i251", "Part two is coming."),
+            ("i252", "The final. July 19th."),
+            ("i253", "Same brother."),
+            ("i254", "Same kid."),
+            ("i255", "Bigger stadium."),
+            ("i256", "Subscribe so you don't miss it."),
+            ("i257", "See you there."),
             ("i258", "Keyne."),
         ],
     },
@@ -410,7 +410,7 @@ SCENES = [
     {"name": "ACTE 8A - Demi France match", "lines": ACTS[7]["lines"][0:16]},
     {"name": "ACTE 8B - Calin et depart NYC", "lines": ACTS[7]["lines"][16:32]},
     {"name": "ACTE 9 - Avant finale NYC", "lines": ACTS[8]["lines"]},
-    {"name": "ACTE 10 - Suspense finale", "lines": ACTS[9]["lines"]},
+    {"name": "ACTE 10 - Teaser Part 2 finale", "lines": ACTS[9]["lines"]},
 ]
 
 FLOW_BATCHES = [
@@ -431,8 +431,8 @@ FLOW_BATCHES = [
     {"id": "Acte8-A", "act": "ACTE 8 Demi 14 jul", "start": "i187", "end": "i202", "count": 16, "rythme": "3-4 sec/image"},
     {"id": "Acte8-B", "act": "ACTE 8 Demi 14 jul", "start": "i203", "end": "i218", "count": 16, "rythme": "3-4 sec/image"},
     {"id": "Acte9", "act": "ACTE 9 Avant finale", "start": "i219", "end": "i232", "count": 14, "rythme": "3-4 sec/image"},
-    {"id": "Acte10-A", "act": "ACTE 10 Suspense", "start": "i233", "end": "i247", "count": 15, "rythme": "3-4 sec/image"},
-    {"id": "Acte10-B", "act": "ACTE 10 Suspense", "start": "i249", "end": "i258", "count": 10, "rythme": "3-4 sec/image"},
+    {"id": "Acte10-A", "act": "ACTE 10 Teaser P2", "start": "i233", "end": "i247", "count": 15, "rythme": "3-4 sec/image"},
+    {"id": "Acte10-B", "act": "ACTE 10 Teaser P2", "start": "i249", "end": "i258", "count": 10, "rythme": "3-4 sec/image"},
 ]
 
 
@@ -465,7 +465,7 @@ def lines_for_image_range(start_id: str, end_id: str):
 
 SUSPENSE_IMAGE_START = 233
 SUSPENSE_IMAGE_END = 258
-SUSPENSE_SEC_PER_LINE = 2.4  # acte 10 : 25 lignes en 1 bloc VO <= 60 sec
+TEASER_SEC_PER_LINE = 2.4  # acte 10 teaser : 25 lignes en 1 bloc VO <= 60 sec
 
 
 def line_duration_seconds(img_id: str) -> float:
@@ -473,7 +473,7 @@ def line_duration_seconds(img_id: str) -> float:
     if n <= HOOK_IMAGE_COUNT:
         return HOOK_SEC_PER_LINE
     if SUSPENSE_IMAGE_START <= n <= SUSPENSE_IMAGE_END:
-        return SUSPENSE_SEC_PER_LINE
+        return TEASER_SEC_PER_LINE
     return BODY_SEC_PER_LINE
 
 
