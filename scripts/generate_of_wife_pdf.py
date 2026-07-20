@@ -398,7 +398,7 @@ SCENES = [
         ],
     },
     {
-        "num": 24, "act": "ACTE 7 - THE CHOICE", "name": "Black Screen",
+        "num": 24, "act": "ACTE 7 - THE CHOICE", "name": "The Unresolved Choice",
         "range": "i241-i250", "count": 10, "rhythm": "3-5 sec/image",
         "phrases": [
             "The kitchen goes silent.",
@@ -408,8 +408,8 @@ SCENES = [
             "No music swells.",
             "No narrator explains.",
             "No easy answer appears.",
-            "Black screen.",
-            "Hold.",
+            "The kitchen holds two futures at once.",
+            "She reaches across the table. Your hand does not move.",
             "What would you have done.",
         ],
     },
