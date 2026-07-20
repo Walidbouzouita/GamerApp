@@ -421,12 +421,16 @@ FLOW_STYLE = (
 )
 
 CHAR_BIBLE = [
-    "Husband (POV): 32 years old, short brown hair, blue work shirt or grey home t-shirt, tired eyes, consistent stick-figure design.",
-    "Wife: 29 years old, mid-length blonde hair, casual home dress or content-creator outfit (suggestive never explicit), smile that fades across acts.",
-    "Neighbor: 45 years old, polo shirt, judgmental expression.",
-    "Mother-in-law: 55 years old, blouse, forced polite smile.",
-    "HR Manager: 40 years old, office attire, neutral stern face.",
-    "Recurring objects: ring light, shipping boxes, laptop, mortgage letters, wedding photo, half-packed suitcase, kitchen table cash.",
+    "See POV-Husband-OF-Wife-Character-References.pdf for full sheets and Flow prompts.",
+    "HUSBAND (POV): 32, short messy brown hair, medium skin, blue work shirt or grey t-shirt, wedding band, tired eyes.",
+    "THE WIFE: 29, voluminous honey-blonde wavy hair, warm tan skin, full lips, glamorous 2000s-inspired cartoon look. Home: cream sweater + leggings. Creator: black crop top + jeans. Never use real-person names in Flow prompts.",
+    "NEIGHBOR: 45, receding brown hair, green polo, khaki shorts, smug suburban dad.",
+    "MOTHER IN LAW: 55, grey-blonde hair, floral blouse, cardigan, forced polite smile.",
+    "FATHER IN LAW: 58, grey hair, glasses, navy shirt, avoidant gaze at dinner.",
+    "COWORKER: 30, short black hair, white office shirt, lanyard badge, smirk with phone.",
+    "HR MANAGER: 40, dark hair bun, glasses, grey blazer, clipboard, stern neutral face.",
+    "Recurring objects: ring light, shipping boxes, laptop, mortgage letters, wedding photo, half-packed suitcase.",
+    "Style: 2D minimalist storytime animation, thick black outlines, flat colors — same as Sister/Brother channel sheets.",
     "Avoid generated text inside images; add titles, dates, amounts, and app names in post-production only.",
 ]
 
