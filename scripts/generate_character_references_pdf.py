@@ -126,6 +126,43 @@ Glamorous early-2000s inspired cartoon woman. Not photorealistic. Not a real per
             "full lips, defined cheekbones, cream sweater or black crop top with jeans, "
             "glamorous cartoon proportions, gold hoop earrings"
         ),
+        "variants": [
+            {
+                "id": "THE_WIFE_HOME",
+                "file": "character-ref-the-wife.png",
+                "scenes": "04-06, 19-20, 22-24",
+                "outfit": "cream oversized sweater, black leggings",
+                "flow_tag": "THE WIFE HOME: cream sweater, black leggings, warm smile",
+            },
+            {
+                "id": "THE_WIFE_CREATOR",
+                "file": "character-ref-the-wife-creator.png",
+                "scenes": "07-09, 16",
+                "outfit": "black cropped halter top, high-waist jeans, ring light",
+                "flow_tag": "THE WIFE CREATOR: black crop halter, high-waist jeans, ring light, confident smirk",
+            },
+            {
+                "id": "THE_WIFE_PERFORMING",
+                "file": "character-ref-the-wife-performing.png",
+                "scenes": "10-12, 21",
+                "outfit": "black crop top, fitted shorts, ring light, phone selfie",
+                "flow_tag": "THE WIFE PERFORMING: black crop top, ring light glow, performing for camera, flirty",
+            },
+            {
+                "id": "THE_WIFE_NIGHT",
+                "file": "character-ref-the-wife-night.png",
+                "scenes": "08, 10-11, 20-21",
+                "outfit": "black fitted tank top, yoga pants, barefoot, office at night",
+                "flow_tag": "THE WIFE NIGHT: black tank top, yoga pants, ring light, secretive shush gesture",
+            },
+            {
+                "id": "THE_WIFE_GLAMOUR",
+                "file": "character-ref-the-wife-glamour.png",
+                "scenes": "13, 15, 17-18, 23",
+                "outfit": "black cowl halter crop, low-rise flared jeans, heels",
+                "flow_tag": "THE WIFE GLAMOUR: black halter crop top, low-rise jeans, heels, glamorous 2000s look",
+            },
+        ],
     },
     {
         "id": "NEIGHBOR",
@@ -418,6 +455,20 @@ def main():
         story.append(Spacer(1, 0.05 * inch))
         story.append(Paragraph("FLOW PROMPT - GENERER LA FICHE REFERENCE", styles["BodySmall"]))
         story.append(Preformatted(c["flow_sheet_prompt"], styles["PromptBox"]))
+        if c.get("variants"):
+            story.append(Spacer(1, 0.08 * inch))
+            story.append(Paragraph("VARIANTES THE WIFE (par scene)", styles["BodySmall"]))
+            vdata = [["Variante", "Fichier", "Scenes", "FLOW TAG"]]
+            for v in c["variants"]:
+                vdata.append([v["id"], v["file"], v["scenes"], v["flow_tag"]])
+            vt = Table(vdata, colWidths=[1.0 * inch, 1.5 * inch, 0.7 * inch, 2.9 * inch])
+            vt.setStyle(TableStyle([
+                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                ("FONTSIZE", (0, 0), (-1, -1), 7),
+                ("GRID", (0, 0), (-1, -1), 0.25, colors.grey),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ]))
+            story.append(vt)
         story.append(Spacer(1, 0.15 * inch))
 
     story.append(PageBreak())
